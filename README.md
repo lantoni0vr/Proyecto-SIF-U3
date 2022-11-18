@@ -10,7 +10,8 @@
 
 1. Node 
 2. Npm
-3. Postgres
+3. Sequelize
+4. Postgres
 
 - Instrucciones:
 

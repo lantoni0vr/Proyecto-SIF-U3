@@ -1,5 +1,5 @@
-import { plainToClass } from "class-transformer";
 import { validate } from "class-validator";
+import { plainToClass } from "class-transformer";
 import { Router, Request, Response, request } from "express";
 import { CreateMusicDto } from "../dtos/create-music.dto";
 import { UpdateMusicDto } from "../dtos/update-music.dto";
@@ -50,7 +50,7 @@ export class MusicController{
         return res.json(await musicService.create(createMusicDto));
 
     }
-
+    //UPDATE
     async update(req: Request, res: Response): Promise<Response>{
 
         const { id } = req.params;
@@ -75,6 +75,7 @@ export class MusicController{
         return res.json(music); 
     }
 
+    //DELETE
     async delete(req: Request, res: Response): Promise<Response>{
 
         const {id} = req.params

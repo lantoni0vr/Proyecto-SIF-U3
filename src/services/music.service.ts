@@ -5,18 +5,12 @@ import { Music } from '../models/music';
 
 class MusicService {
 
-    // private categories = [
-    //     {id: 1, name: 'Escritorios', description: ""},
-    //     {id: 2, name: 'Computadoras', description: ""}
-    // ]
-
     public async getList(){
         const musicDB = await Music.findAll({})
         return musicDB;
     }
 
     public async getOne( id: number){
-        //TODO: agregar mensaje de error cuando no se encuentre el id de la categoria
         const music = await Music.findOne({where: {id}})
         return music;
 
