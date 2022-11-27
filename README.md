@@ -1,9 +1,9 @@
 # API - Biblioteca de Musica
 
-- Integrantes:
-                Jose Alfredo Herrera
-                Wilmer Andre Flores
-                Lazaro Antonio Vasquez
+Integrantes:
+- Jose Alfredo Herrera
+- Wilmer Andre Flores
+- Lazaro Antonio Vasquez
 
 
 - Requisitos:

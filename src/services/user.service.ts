@@ -2,8 +2,6 @@ import { request, Request, Response} from 'express'
 import { CreateUserDto } from '../dtos/user/create-user.dto';
 import { UpdateUserDto } from '../dtos/user/update-user.dto';
 import { User } from '../models/user';
-import * as bcrypt from "bcrypt";
-import { EntityTarget, Repository } from "typeorm";
 
 
 class UserService {
