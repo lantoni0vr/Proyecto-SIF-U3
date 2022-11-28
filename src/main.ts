@@ -1,4 +1,4 @@
-console.log("Hola mundo, y planeta")
+console.log("Hola Santa Rosa, y Honduras")
 
 import 'dotenv/config';
 import App from './app';

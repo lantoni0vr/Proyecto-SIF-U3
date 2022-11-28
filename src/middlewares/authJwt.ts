@@ -12,15 +12,20 @@ module.exports= (req: Request, res: Response, next: NextFunction) =>{
     else{
 
         //Comprobar la validez de este token
-        const token = req.headers.authorization.split("")[1]
+        const token = req.headers.authorization.split(" ")[1];
 
         jtw.verify(token, authConfing.secret, (err: any, decoded: any) =>{
             if(err){
+
                 res.status(500).json({ msg: "Ha ocurrido un error", err});
+                console.log(err);
             }
             else{
-                req.body.user = decoded
+               
+                // req.body.user = decoded
+                //req.params.user = decoded;
                 next();
+                
             }
         })
     }

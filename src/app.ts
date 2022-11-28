@@ -1,7 +1,6 @@
 import express, { json } from "express";
 import {MusicController} from "./controllers/music.controller";
-import {UserController} from "./controllers/user.controller";
-import authRoutes from "./routes/auth.routes"
+import Routes from "./routes/routes"
 import { conn} from "./database/connection";
 import { Music } from "./models/music";
 import { User } from "./models/user";
@@ -11,7 +10,6 @@ class App {
     public express: express.Application;
 
     musicController: MusicController;
-    userController: UserController;
 
     constructor() {
         this.express = express();
@@ -26,9 +24,9 @@ class App {
     }
 
     routes(){
-        this.express.use('/api', this.musicController.router);
-        this.express.use('/api/user', this.userController.router);
-        this.express.use('/api/auth', authRoutes)
+        //this.express.use('/api', this.musicController.router);
+        //this.express.use('/api/user', this.userController.router);
+        this.express.use('/api', Routes)
     }
 
     db(){
@@ -50,7 +48,6 @@ class App {
 
     controllers(){
         this.musicController = new MusicController();
-        this.userController = new UserController();
     }
 }
 

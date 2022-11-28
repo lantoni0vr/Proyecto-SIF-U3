@@ -3,14 +3,17 @@ import {Request, Response} from 'express'
 import * as bcrypt from 'bcrypt'
 const jtw = require('jsonwebtoken')
 const authConfing = require("../config/auth.config")
+import userService from "../services/user.service";
 
 module.exports = {
 
-    //Register
+
+    
+    //Register  - CREAR USUARIOS
     signUp(req: Request, res: Response){
 
         //Encriptar la contrasena
-        const password = bcrypt.hashSync(req.body.password, +authConfing.rounds)
+        const password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfing.rounds))
         User.create({
             name: req.body.name,
             email: req.body.email,
@@ -37,7 +40,7 @@ module.exports = {
     },
 
 
-//Login
+//Login --ENTRAR
     signIn(req: Request, res: Response){
         
         const {email, password} = req.body
@@ -70,7 +73,6 @@ module.exports = {
                
             }
         })
-       
+    },
 
-    }
 }

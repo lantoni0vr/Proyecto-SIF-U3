@@ -1,9 +1,11 @@
+/*
 import { validate } from "class-validator";
 import { plainToClass } from "class-transformer";
 import { Router, Request, Response, request } from "express";
 import { CreateUserDto } from "../dtos/user/create-user.dto";
 import { UpdateUserDto } from "../dtos/user/update-user.dto";
 import userService from "../services/user.service";
+const authController = require('../controllers/auth.controller')
 
 export class UserController{
 
@@ -16,24 +18,17 @@ export class UserController{
     initRoutes(){
         this.router.get('', this.getList);
         this.router.get('/:id', this.getOne);
-        this.router.post('', this.create);
         this.router.patch('/:id', this.update);
         this.router.delete('/:id', this.delete);
     }
 
-    async getList(req: Request, res: Response): Promise<Response>{
-        const user = await userService.getList()
-        return res.json(user);
-    }
 
-    //TRAER
-    async getOne(req: Request, res: Response): Promise<Response>{
-        const { id } = req.params;
-        const user = await userService.getOne(+id);
-        return res.json(user);
-    }
+
 
     //CREATE
+
+
+    
     async create(req: Request, res: Response): Promise<Response>{
 
         const payload = req.body;
@@ -52,6 +47,8 @@ export class UserController{
         return res.json(await userService.create(createUserDto));
 
     }
+
+
     //UPDATE
     async update(req: Request, res: Response): Promise<Response>{
 
@@ -87,3 +84,5 @@ export class UserController{
         return res.status(204).json();
     }
 }
+
+*/

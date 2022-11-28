@@ -21,7 +21,6 @@ export interface UserModel extends Sequelize.Model<UserModel, UserAddModel>{
     email: string
     phone: string
     password: string
-    roles: []
 }
 
 
@@ -59,5 +58,5 @@ export const User = conn.define<UserModel, UserAddModel>( 'user',{
 User.hasMany(Music, {
     sourceKey: 'id',
     foreignKey: 'user_id',
-    as: 'user'
+    as: 'user' 
 });
