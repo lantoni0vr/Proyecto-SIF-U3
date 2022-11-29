@@ -25,7 +25,7 @@ const router: Router = Router()
 //TRAIDA DE CONTROLLES MUSIC
     router.post('/music/create' , musicController.create); //Agregar una cancion
     router.get('/music/list' , musicController.getList); //Traer una lista de canciones
-    router.get('/music/:id' , musicController.getOne); //Traer una cancion
+    router.get('/music/:id' , musicController.getOne); //Traer una cancio
     router.patch('/music/:id' , musicController.update); //Actualizar una cancion
     router.delete('/music/:id' , musicController.delete); //Eliminar una cancion
 
