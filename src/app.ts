@@ -1,20 +1,19 @@
 import express, { json } from "express";
-import {MusicController} from "./controllers/music.controller";
 import Routes from "./routes/routes"
 import { conn} from "./database/connection";
 import { Music } from "./models/music";
 import { User } from "./models/user";
+import { TableInheritance } from "typeorm";
 
 class App {
 
     public express: express.Application;
 
-    musicController: MusicController;
+   
 
     constructor() {
         this.express = express();
         this.middlewares();
-        this.controllers();
         this.db();
         this.routes();
     }
@@ -46,9 +45,7 @@ class App {
             () => console.log(`Server run in: http://localhost:${port}`));
     }
 
-    controllers(){
-        this.musicController = new MusicController();
-    }
+ 
 }
 
 export default new App();

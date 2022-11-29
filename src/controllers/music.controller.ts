@@ -1,37 +1,23 @@
 import { validate } from "class-validator";
 import { plainToClass } from "class-transformer";
-import { Router, Request, Response, request } from "express";
+import { Request, Response, request } from "express";
 import { CreateMusicDto } from "../dtos/create-music.dto";
 import { UpdateMusicDto } from "../dtos/update-music.dto";
 import musicService from "../services/music.service";
 
-export class MusicController{
-
-    router = Router();
-
-    constructor() {
-        this.initRoutes();
-    }
-        
-    initRoutes(){
-        this.router.get('/music', this.getList);
-        this.router.get('/music/:id', this.getOne);
-        this.router.post('/music', this.create);
-        this.router.patch('/music/:id', this.update);
-        this.router.delete('/music/:id', this.delete);
-    }
+module.exports = {
 
     async getList(req: Request, res: Response): Promise<Response>{
         const music = await musicService.getList()
         return res.json(music);
     }
-
+    ,
     async getOne(req: Request, res: Response): Promise<Response>{
         const { id } = req.params;
         const music = await musicService.getOne(+id);
         return res.json(music);
     }
-
+    ,
     async create(req: Request, res: Response): Promise<Response>{
 
         const payload = req.body;
@@ -50,6 +36,7 @@ export class MusicController{
         return res.json(await musicService.create(createMusicDto));
 
     }
+    ,
     //UPDATE
     async update(req: Request, res: Response): Promise<Response>{
 
@@ -74,7 +61,7 @@ export class MusicController{
         
         return res.json(music); 
     }
-
+    ,
     //DELETE
     async delete(req: Request, res: Response): Promise<Response>{
 
