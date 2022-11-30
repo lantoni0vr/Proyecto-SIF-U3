@@ -1,4 +1,4 @@
-import { request, Request, Response} from 'express'
+import { request, Request, response, Response} from 'express'
 import { CreateUserDto } from '../dtos/user/create-user.dto';
 import { UpdateUserDto } from '../dtos/user/update-user.dto';
 import { User } from '../models/user';
@@ -22,8 +22,6 @@ class UserService {
     public async create(createUserDto: CreateUserDto){
 
         const createUser = await User.create(createUserDto);
-        //const hash = await bcrypt.hash(createUser.password, 10);
-        //createUser.password = hash;
         return createUser;
 
     }
@@ -53,7 +51,7 @@ class UserService {
         const user = await User.findOne({ where: { email } });
 
         if(!user){
-            return null
+            return 'Sus credenciales no coinciden'
         }
 
         if (!(await bycrypt.compare(updatePasswordDto.password, user.password))) {

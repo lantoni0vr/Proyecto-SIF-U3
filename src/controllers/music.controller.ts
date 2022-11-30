@@ -1,8 +1,8 @@
 import { validate } from "class-validator";
 import { plainToClass } from "class-transformer";
 import { Request, Response, request } from "express";
-import { CreateMusicDto } from "../dtos/create-music.dto";
-import { UpdateMusicDto } from "../dtos/update-music.dto";
+import { CreateMusicDto } from "../dtos/music/create-music.dto";
+import { UpdateMusicDto } from "../dtos/music/update-music.dto";
 import musicService from "../services/music.service";
 
 module.exports = {

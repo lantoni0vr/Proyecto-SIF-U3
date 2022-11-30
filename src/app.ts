@@ -1,9 +1,7 @@
 import express, { json } from "express";
 import Routes from "./routes/routes"
 import { conn} from "./database/connection";
-import { Music } from "./models/music";
 import { User } from "./models/user";
-import { TableInheritance } from "typeorm";
 
 class App {
 
@@ -23,8 +21,6 @@ class App {
     }
 
     routes(){
-        //this.express.use('/api', this.musicController.router);
-        //this.express.use('/api/user', this.userController.router);
         this.express.use('/api', Routes)
     }
 

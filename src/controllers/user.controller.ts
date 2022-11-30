@@ -1,6 +1,6 @@
 import { validate } from "class-validator";
 import { plainToClass } from "class-transformer";
-import { Router, Request, Response, request } from "express";
+import { Router, Request, Response, request, response } from "express";
 import * as bcrypt from 'bcrypt';
 const authConfing = require("../config/auth.config");
 import userService from "../services/user.service";
@@ -73,9 +73,6 @@ module.exports = {
         const updatePasswordDto = plainToClass(UpdatePasswordDto, payload);
 
         const errors = await validate(updatePasswordDto);
-
-        // updatePasswordDto.password = await bcrypt.hash(req.body.password, Number.parseInt(authConfing.rounds));
-        // updatePasswordDto.new_password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfing.rounds));
 
         if(errors.length > 0){
             console.log(errors);

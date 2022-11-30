@@ -1,6 +1,6 @@
 import { request, Request, Response} from 'express'
-import { CreateMusicDto } from '../dtos/create-music.dto';
-import { UpdateMusicDto } from '../dtos/update-music.dto';
+import { CreateMusicDto } from '../dtos/music/create-music.dto';
+import { UpdateMusicDto } from '../dtos/music/update-music.dto';
 import { Music } from '../models/music';
 
 class MusicService {
