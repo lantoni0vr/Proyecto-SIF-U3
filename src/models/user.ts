@@ -11,6 +11,7 @@ export interface UserAddModel{
     email: string
     phone: string
     password: string
+    role: string
 
 }
 
@@ -21,6 +22,7 @@ export interface UserModel extends Sequelize.Model<UserModel, UserAddModel>{
     email: string
     phone: string
     password: string
+    role: string
 }
 
 
@@ -50,8 +52,13 @@ export const User = conn.define<UserModel, UserAddModel>( 'user',{
 
     password:{
         type: Sequelize.DataType.STRING,
-        unique: true,
+ //       unique: true,
         allowNull: false
+    },
+
+    role :{
+        type: Sequelize.DataType.STRING,
+        allowNull : false
     }
 })
 

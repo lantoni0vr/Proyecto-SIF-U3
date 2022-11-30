@@ -18,7 +18,8 @@ module.exports = {
             name: req.body.name,
             email: req.body.email,
             phone: req.body.phone,
-            password: password
+            password: password,
+            role: req.body.role
         }).then(user => {
 
          //Crear el token

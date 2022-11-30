@@ -21,5 +21,10 @@ export class CreateUserDto{
     @Length(6, 250)
     @IsNotEmpty()
     password: string
+
+    @Length(6, 250)
+    @IsNotEmpty()
+    role: string
+
 }
 
