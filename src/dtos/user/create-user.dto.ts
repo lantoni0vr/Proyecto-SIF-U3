@@ -5,7 +5,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 export class CreateUserDto{
 
     @Length(3, 50, {
-        message: "El NOMBRE debe estar entre 3 y 50 caracteres"
+        message: "El nombre debe estar entre 3 y 50 caracteres"
     })
     @IsNotEmpty()
     name: string;

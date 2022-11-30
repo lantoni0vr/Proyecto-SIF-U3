@@ -3,7 +3,6 @@ import {Request, Response} from 'express'
 import * as bcrypt from 'bcrypt'
 const jtw = require('jsonwebtoken')
 const authConfing = require("../config/auth.config")
-import userService from "../services/user.service";
 
 module.exports = {
 

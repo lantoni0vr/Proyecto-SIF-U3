@@ -1,4 +1,4 @@
-import { request, Request, Response} from 'express'
+import { request, Request, response, Response} from 'express'
 import { CreateUserDto } from '../dtos/user/create-user.dto';
 import { UpdateUserDto } from '../dtos/user/update-user.dto';
 import { User } from '../models/user';
@@ -22,8 +22,6 @@ class UserService {
     public async create(createUserDto: CreateUserDto){
 
         const createUser = await User.create(createUserDto);
-        //const hash = await bcrypt.hash(createUser.password, 10);
-        //createUser.password = hash;
         return createUser;
 
     }
@@ -57,7 +55,7 @@ class UserService {
         }
 
         if (!(await bycrypt.compare(updatePasswordDto.password, user.password))) {
-            return null;
+            return null
         }
 
         updatePasswordDto.new_password = bycrypt.hashSync(updatePasswordDto.new_password, Number.parseInt(authConfing.rounds));
