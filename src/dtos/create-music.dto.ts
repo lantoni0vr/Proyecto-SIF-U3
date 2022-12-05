@@ -8,15 +8,21 @@ export class CreateMusicDto{
     @IsNotEmpty()
     title: string;
 
-    @Length(3, 20)
+    @Length(3, 20, {
+        message: "El arista debe estar entre 3 y 50 caracteres"
+    })
     @IsNotEmpty()
     artist: string;
 
-    @Length(3, 15)
+    @Length(3, 15, {
+        message: "El genero debe estar entre 3 y 50 caracteres"
+    })
     @IsOptional()
     gender: string;
 
-    @Length(3, 20)
+    @Length(3, 20, {
+        message: "El album debe estar entre 3 y 50 caracteres"
+    })
     @IsOptional()
     album: string
 

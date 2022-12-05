@@ -1,10 +1,6 @@
-import { MAX, validate } from 'class-validator';
-import { Model } from 'sequelize';
 import * as Sequelize from 'sequelize-typescript'
-import { AllowNull } from 'sequelize-typescript';
 import {conn }from "../database/connection";
-import { Music } from './music';
-
+import { Role } from '../models/roles';
 
 export interface UserAddModel{
     name: string
@@ -12,7 +8,6 @@ export interface UserAddModel{
     phone: string
     password: string
     role: string
-
 }
 
 
@@ -37,12 +32,8 @@ export const User = conn.define<UserModel, UserAddModel>( 'user',{
     email: {
         type: Sequelize.DataType.STRING,
         allowNull: false,
-        unique: true,
-        validate: {
-            isEmail: {
-                msg: "El email debe ser un correo valido"
-            }
-        }
+        unique : true,
+               
     },
 
     phone:{
@@ -62,8 +53,3 @@ export const User = conn.define<UserModel, UserAddModel>( 'user',{
     }
 })
 
-User.hasMany(Music, {
-    sourceKey: 'id',
-    foreignKey: 'user_id',
-    as: 'user' 
-});

@@ -1,29 +1,45 @@
-import { Length, IsNotEmpty, IsOptional} from 'class-validator';
+import { Length, IsNotEmpty, IsOptional, IsEmail} from 'class-validator';
 import { Unique } from 'sequelize-typescript';
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 
 export class CreateUserDto{
 
     @Length(3, 50, {
-        message: "El NOMBRE debe estar entre 3 y 50 caracteres"
+        message: "El nombre debe estar entre 3 y 50 caracteres"
     })
-    @IsNotEmpty()
+    @IsNotEmpty({
+        message : "Debe de ingresar datos"
+    })
     name: string;
 
-    @Length(3, 200)
-    @IsNotEmpty()
+    @Length(3, 200, {
+        message: "El email debe estar entre 3 y 50 caracteres"
+    })
+    @IsNotEmpty({
+        message : "Debe de ingresar datos"
+    })
+    @IsEmail()
     email: string;
 
-    @Length(7, 60)
+    @Length(8 ,8 , {
+        message : "El telefono debe de ser valido"
+    })
     @IsOptional()
     phone: string;
 
-    @Length(6, 250)
-    @IsNotEmpty()
+    @Length(6, 250, {
+        message: "La contrasena debe estar entre 3 y 50 caracteres"
+    })
+    @IsNotEmpty({
+        message : "Debe de ingresar datos"
+    })
     password: string
 
-    @Length(6, 250)
-    @IsNotEmpty()
+    @Length(6, 250, {
+        message: "El rol debe estar entre 3 y 20 caracteres"
+    })
+    @IsNotEmpty({
+        message : "Debe de ingresar datos"
+    })
     role: string
 
 }

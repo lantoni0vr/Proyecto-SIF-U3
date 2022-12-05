@@ -1,4 +1,4 @@
-import { Request,Response, NextFunction } from 'express'
+import { Request,Response, NextFunction } from 'express'    
 const jtw = require('jsonwebtoken')
 const authConfing = require("../config/auth.config")
 
@@ -12,7 +12,7 @@ module.exports= (req: Request, res: Response, next: NextFunction) =>{
     else{
 
         //Comprobar la validez de este token
-        const token = req.headers.authorization.split(" ")[1];
+        const token = req.headers.authorization.split(" ")[1]
 
         jtw.verify(token, authConfing.secret, (err: any, decoded: any) =>{
             if(err){
@@ -22,8 +22,6 @@ module.exports= (req: Request, res: Response, next: NextFunction) =>{
             }
             else{
                
-                // req.body.user = decoded
-                //req.params.user = decoded;
                 next();
                 
             }

@@ -8,19 +8,23 @@ import musicService from "../services/music.service";
 module.exports = {
 
     async getList(req: Request, res: Response): Promise<Response>{
-        const music = await musicService.getList()
-        return res.json(music);
+        const responsedto = await musicService.getList()
+        return res.status(responsedto.code).json(responsedto);
     }
     ,
     async getOne(req: Request, res: Response): Promise<Response>{
         const { id } = req.params;
-        const music = await musicService.getOne(+id);
-        return res.json(music);
+        const responsedto = await musicService.getOne(+id);
+        return res.status(200).json({
+            message : responsedto.message,
+            data : responsedto.data
+        });
     }
     ,
     async create(req: Request, res: Response): Promise<Response>{
 
         const payload = req.body;
+
         let createMusicDto = plainToClass(CreateMusicDto, payload);
 
         const errors = await validate(createMusicDto);
@@ -33,7 +37,9 @@ module.exports = {
             })
         }
 
-        return res.json(await musicService.create(createMusicDto));
+        const responsedto = await musicService.create(createMusicDto)
+
+        return res.status(200).json(responsedto);
 
     }
     ,

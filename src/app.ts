@@ -1,9 +1,6 @@
 import express, { json } from "express";
 import Routes from "./routes/routes"
 import { conn} from "./database/connection";
-import { Music } from "./models/music";
-import { User } from "./models/user";
-import { TableInheritance } from "typeorm";
 import { Role } from "./models/roles";
 
 class App {
@@ -33,9 +30,8 @@ class App {
         conn
         .sync()
         .then(() => {
-            User.sync();
+   //         User.sync();
             Role.sync();
-            Music.sync();
             console.log(`Database is connected`);
         })
         .catch((err) => {
