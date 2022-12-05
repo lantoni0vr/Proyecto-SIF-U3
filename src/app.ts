@@ -2,6 +2,8 @@ import express, { json } from "express";
 import Routes from "./routes/routes"
 import { conn} from "./database/connection";
 import { User } from "./models/user";
+import { Role } from "./models/roles";
+import roleService from "./services/role.service";
 
 class App {
 
@@ -28,8 +30,14 @@ class App {
         conn
         .sync()
         .then(() => {
+            
+            Role.sync();
             User.sync();
+
             console.log(`Database is connected`);
+
+            roleService.createdRoles();
+
         })
         .catch((err) => {
             console.log(`Error`, err);

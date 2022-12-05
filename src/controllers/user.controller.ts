@@ -6,8 +6,9 @@ const authConfing = require("../config/auth.config");
 import userService from "../services/user.service";
 import { CreateUserDto } from "../dtos/user/create-user.dto";
 import { UpdatePasswordDto } from "../dtos/user/update-password.dto";
+import { tokenG, tokenRole } from "../middlewares/authJwt";
 
-module.exports = {
+class UserController {
 
     async create(req: Request, res: Response): Promise<Response>{
 
@@ -26,23 +27,32 @@ module.exports = {
         }
         return res.json(await userService.create(createUserDto));
 
-    },
+    }
 
     //TRAER LISTA
     async getList(req: Request, res: Response): Promise<Response>{
+
+        if (tokenG.role !== 'admin') return res.status(401).send({ code: 401, message: 'You dont have permission to see the users!' });
+
         const user = await userService.getList()
         return res.json(user);
-    },
+    }
 
     //TRAER UNO
     async getOne(req: Request, res: Response): Promise<Response>{
+
+        if (tokenG.role !== 'admin') return res.status(401).send({ code: 401, message: 'You dont have permission to get a user!' });
+
         const { id } = req.params;
         const user = await userService.getOne(+id);
+        console.log(await userService.getUserRole(+id));
         return res.json(user);
-    },
+    }
 
     //ACTUALIZAR
     async update(req: Request, res: Response): Promise<Response>{
+
+        if (tokenG.role !== 'admin') return res.status(401).send({ code: 401, message: 'You dont have permission to update!' });
 
         const { id } = req.params;
         const payload = req.body;
@@ -55,7 +65,7 @@ module.exports = {
             console.log(errors);
             
             return res.status(400).json({
-                "Validation-errors" : errors
+                msg: 'Error in the requested request'
             })
         }
 
@@ -64,7 +74,7 @@ module.exports = {
         console.log(user) // + VALIDAR ANTES CONTRASEÑA ANTERIOR ANDRE
         
         return res.json(user);  
-    },
+    }
 
     async updatePassword (req: Request, res: Response): Promise<Response> {
 
@@ -78,7 +88,7 @@ module.exports = {
             console.log(errors);
             
             return res.status(400).json({
-                "Validation-errors" : errors
+                msg: 'Error in the requested request'
             })
         }
 
@@ -86,17 +96,20 @@ module.exports = {
 
         return res.json(user);
 
-    },
+    }
 
     //ELIMINAR
     async delete(req: Request, res: Response): Promise<Response>{
+
+        if (tokenG.role !== 'admin') return res.status(401).send({ code: 401, message: 'You dont have permission to delete!' });
 
         const {id} = req.params
         
         await userService.delete(+id)
 
-        return res.status(204).json();
+        return res.status(202).json({ msg: 'Deleted correctly!!'});
     }
 
-
 }
+
+export default new UserController();

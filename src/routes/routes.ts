@@ -1,9 +1,9 @@
 import {Router} from 'express'
 
-const auth = require('../middlewares/authJwt')
 const authController = require('../controllers/auth.controller')
-const musicController = require('../controllers/music.controller')
-const userController = require('../controllers/user.controller')
+import userController from '../controllers/user.controller'
+import { auth } from '../middlewares/authJwt'
+import musicController from '../controllers/music.controller'
 
 
 const router: Router = Router()
@@ -13,16 +13,16 @@ const router: Router = Router()
     router.post('/auth/signup', authController.signUp) // Registrarse
     router.patch('/auth/update-password', auth, userController.updatePassword) //Actualizar Password
 
-    router.get('/user/list', userController.getList); //Traer lista de usuarios  
-    router.get('/user/:id', userController.getOne); //Traer un usuario
-    router.patch('/user/:id', userController.update); //Actualizar un usuario
-    router.delete('/user/:id', userController.delete); //eliminar un usuario
+    router.get('/user/list', auth, userController.getList); //Traer lista de usuarios  
+    router.get('/user/:id', auth,userController.getOne); //Traer un usuario
+    router.patch('/user/:id', auth,userController.update); //Actualizar un usuario
+    router.delete('/user/:id', auth,userController.delete); //eliminar un usuario
 
 //TRAIDA DE CONTROLLES MUSIC
-    router.post('/music/create' , musicController.create); //Agregar una cancion
-    router.get('/music/list' , musicController.getList); //Traer una lista de canciones
-    router.get('/music/:id' , musicController.getOne); //Traer una cancio
-    router.patch('/music/:id' , musicController.update); //Actualizar una cancion
-    router.delete('/music/:id' , musicController.delete); //Eliminar una cancion
+    router.post('/music/create' , auth, musicController.create); //Agregar una cancion
+    router.get('/music/list' , auth, musicController.getList); //Traer una lista de canciones
+    router.get('/music/:id' , auth, musicController.getOne); //Traer una cancio
+    router.patch('/music/:id' , auth, musicController.update); //Actualizar una cancion
+    router.delete('/music/:id' , auth,musicController.delete); //Eliminar una cancion
 
 export default router;

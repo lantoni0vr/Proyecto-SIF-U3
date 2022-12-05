@@ -1,4 +1,4 @@
-import { Length, IsNotEmpty, IsOptional} from 'class-validator';
+import { Length, IsNotEmpty, IsOptional, IsNumber, IsEmail } from 'class-validator';
 import { Unique } from 'sequelize-typescript';
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 
@@ -10,7 +10,7 @@ export class CreateUserDto{
     @IsNotEmpty()
     name: string;
 
-    @Length(3, 200)
+    @IsEmail()
     @IsNotEmpty()
     email: string;
 
@@ -21,5 +21,10 @@ export class CreateUserDto{
     @Length(6, 250)
     @IsNotEmpty()
     password: string
+
+    @IsNumber()
+    @IsNotEmpty()
+    role_id: number;
+
 }
 

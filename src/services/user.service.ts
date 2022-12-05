@@ -4,6 +4,7 @@ import { UpdateUserDto } from '../dtos/user/update-user.dto';
 import { User } from '../models/user';
 import { UpdatePasswordDto } from '../dtos/user/update-password.dto';
 import bycrypt from 'bcrypt';
+import { Role } from '../models/roles';
 const authConfing = require("../config/auth.config");
 
 class UserService {
@@ -21,7 +22,7 @@ class UserService {
 
     public async create(createUserDto: CreateUserDto){
 
-        const createUser = await User.create(createUserDto);
+        const createUser = await User.create({ ...createUserDto });
         return createUser;
 
     }
@@ -54,7 +55,7 @@ class UserService {
             return 'Sus credenciales no coinciden'
         }
 
-        if (!(await bycrypt.compare(updatePasswordDto.password, user.password))) {
+        if (!(await bycrypt.compare(updatePasswordDto.password, user.dataValues.password))) {
             return null;
         }
 
@@ -81,6 +82,23 @@ class UserService {
             
         return user;
     }
+
+    public async getUserRole (id: number) {
+
+        const userRole = await User.findOne({ where: { id }, include: [{ model: Role }] }).then(data => data?.toJSON());
+
+        return userRole.role.role;
+
+    }
+
+    public async searchUserByEmail (email: string) {
+
+        const user = await User.findOne({ where: { email } });
+
+        return user;
+
+    }
+
 }
 
 export default new UserService();
