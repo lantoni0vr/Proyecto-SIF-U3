@@ -34,19 +34,19 @@ class UserController {
 
         if (tokenG.role !== 'admin') return res.status(401).send({ code: 401, message: 'You dont have permission to see the users!' });
 
-        const user = await userService.getList()
-        return res.json(user);
+        const responsedto = await userService.getList()
+        return res.status(responsedto.code).json(responsedto);
     }
 
     //TRAER UNO
     async getOne(req: Request, res: Response): Promise<Response>{
 
-        if (tokenG.role !== 'admin') return res.status(401).send({ code: 401, message: 'You dont have permission to get a user!' });
+    //    if (tokenG.role !== 'admin') return res.status(401).send({ code: 401, message: 'You dont have permission to get a user!' });
 
         const { id } = req.params;
-        const user = await userService.getOne(+id);
-        console.log(await userService.getUserRole(+id));
-        return res.json(user);
+        const responsedto = await userService.getOne(+id);
+      //  console.log(await userService.getUserRole(+id));
+        return res.status(responsedto.code).json(responsedto);
     }
 
     //ACTUALIZAR
@@ -69,11 +69,11 @@ class UserController {
             })
         }
 
-        let user = await userService.update(updateUserDto, +id);
+        const responsedto = await userService.update(updateUserDto, +id);
 
-        console.log(user) // + VALIDAR ANTES CONTRASEÑA ANTERIOR ANDRE
+        console.log(responsedto) // + VALIDAR ANTES CONTRASEÑA ANTERIOR ANDRE
         
-        return res.json(user);  
+        return res.status(responsedto.code).json(responsedto);  
     }
 
     async updatePassword (req: Request, res: Response): Promise<Response> {
@@ -92,9 +92,9 @@ class UserController {
             })
         }
 
-        let user = await userService.updatePassword(updatePasswordDto);
+        const responsedto = await userService.updatePassword(updatePasswordDto);
 
-        return res.json(user);
+        return res.status(responsedto.code).json(responsedto);
 
     }
 
@@ -105,9 +105,9 @@ class UserController {
 
         const {id} = req.params
         
-        await userService.delete(+id)
+        const responsedto = await userService.delete(+id)
 
-        return res.status(202).json({ msg: 'Deleted correctly!!'});
+        return res.status(responsedto.code).json(responsedto);
     }
 
 }

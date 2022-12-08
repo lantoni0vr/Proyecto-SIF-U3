@@ -12,7 +12,7 @@ export interface MusicAddModel{
 }
 
 export interface MusicModel extends Sequelize.Model<MusicModel, MusicAddModel>{
-    id: number;
+    id: number
     title: string
     artist: string
     gender: string

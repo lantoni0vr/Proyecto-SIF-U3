@@ -10,14 +10,14 @@ import {tokenG} from '../middlewares/authJwt'
 class MusicController {
 
     async getList(req: Request, res: Response): Promise<Response>{
-        const music = await musicService.getList()
-        return res.json(music);
+        const responsedto = await musicService.getList()
+        return res.status(responsedto.code).json(responsedto);
     }
     
     async getOne(req: Request, res: Response): Promise<Response>{
         const { id } = req.params;
-        const music = await musicService.getOne(+id);
-        return res.json(music);
+        const responsedto = await musicService.getOne(+id);
+        return res.status(responsedto.code).json(responsedto);
     }
     
     async create(req: Request, res: Response): Promise<Response>{
@@ -37,7 +37,9 @@ class MusicController {
             })
         }
 
-        return res.json(await musicService.create(createMusicDto));
+        const responsedto = await musicService.create(createMusicDto)
+        
+        return res.status(responsedto.code).json(responsedto)
 
     }
     
@@ -53,6 +55,8 @@ class MusicController {
 
         const errors = await validate(updateMusicDto);
 
+
+
         if(errors.length > 0){
             console.log(errors);
             
@@ -61,11 +65,11 @@ class MusicController {
             })
         }
 
-        let music = await musicService.update(payload, +id);
+        const responsedto = await musicService.update(payload, +id);
 
-        console.log(music)
+        console.log(responsedto)
         
-        return res.json(music); 
+        return res.status(responsedto.code).json(responsedto); 
     }
     
     //DELETE
@@ -75,9 +79,9 @@ class MusicController {
 
         const {id} = req.params
         
-        await musicService.delete(+id)
+        const responsedto = await musicService.delete(+id)
 
-        return res.status(202).json({ msg: 'Deleted correctly!!' });
+        return res.status(responsedto.code).json(responsedto);
     }
 }
 
