@@ -4,6 +4,8 @@ const authController = require('../controllers/auth.controller')
 import userController from '../controllers/user.controller'
 import { auth } from '../middlewares/authJwt'
 import musicController from '../controllers/music.controller'
+import playlist_songController from '../controllers/playlist_song.controller'
+import playlistController from '../controllers/playlist.controller'
 
 
 const router: Router = Router()
@@ -25,4 +27,8 @@ const router: Router = Router()
     router.patch('/music/:id' , auth, musicController.update); //Actualizar una cancion
     router.delete('/music/:id' , auth,musicController.delete); //Eliminar una cancion
 
+// PlayListSong
+    router.post('/music/playlist/add' , auth, playlist_songController.create); //Crear una playList
+    router.get('/music/playlist/:id' , auth, playlistController.getOnePlaylist); //Traer una playlist
+    router.post('/music/playlist/create' , auth, playlistController.create); //Crear una playlist
 export default router;
