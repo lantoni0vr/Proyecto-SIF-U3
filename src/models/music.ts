@@ -1,6 +1,7 @@
 import { AutoIncrement, Column, DataType, Model, Table } from "sequelize-typescript";
 import * as Sequelize from 'sequelize-typescript'
 import {conn }from "../database/connection";
+import { PlayListSong } from "./playlist_song";
 
 export interface MusicAddModel{
     title: string
@@ -45,4 +46,15 @@ export const Music = conn.define<MusicModel, MusicAddModel>( 'music',{
         type: Sequelize.DataType.INTEGER
     }
 
-})
+});
+
+Music.hasMany(PlayListSong, {
+    sourceKey: 'id',
+    foreignKey: 'music_id',
+    as: 'music'
+});
+
+PlayListSong.belongsTo(Music, {
+    foreignKey: 'music_id',
+    targetKey: 'id'
+});

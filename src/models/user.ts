@@ -4,6 +4,7 @@ import * as Sequelize from 'sequelize-typescript'
 import { AllowNull } from 'sequelize-typescript';
 import {conn }from "../database/connection";
 import { Music } from './music';
+import { PlayListSong } from './playlist_song';
 
 
 export interface UserAddModel{
@@ -54,3 +55,15 @@ export const User = conn.define( 'user',{
         allowNull: false
     }
 })
+
+User.hasMany(PlayListSong, {
+    sourceKey: 'id',
+    foreignKey: 'user_id',
+    as: 'user'
+});
+
+PlayListSong.belongsTo(User, {
+    foreignKey: 'user_id',
+    targetKey: 'id'
+});
+

@@ -4,6 +4,8 @@ import { conn} from "./database/connection";
 import { User } from "./models/user";
 import { Role } from "./models/roles";
 import roleService from "./services/role.service";
+import { PlayList } from "./models/playlist";
+import playlistService from "./services/playlist.service";
 
 class App {
 
@@ -33,10 +35,12 @@ class App {
             
             Role.sync();
             User.sync();
+            PlayList.sync();
 
             console.log(`Database is connected`);
 
             roleService.createdRoles();
+            playlistService.createdPlayLists();
 
         })
         .catch((err) => {
