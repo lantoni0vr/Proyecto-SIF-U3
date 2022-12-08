@@ -1,6 +1,4 @@
 import { Length, IsNotEmpty, IsOptional, IsNumber, IsEmail } from 'class-validator';
-import { Unique } from 'sequelize-typescript';
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 
 export class CreateUserDto{
 

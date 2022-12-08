@@ -4,9 +4,8 @@ import { UpdateUserDto } from '../dtos/user/update-user.dto';
 import { User } from '../models/user';
 import { UpdatePasswordDto } from '../dtos/user/update-password.dto';
 import bycrypt from 'bcrypt';
-import { Role } from '../models/roles';
+import { Role } from '../models/roles'; 
 import { ResponseDto } from '../common/dto/responsedto';
-import { Music } from '../models/music';
 const authConfing = require("../config/auth.config");
 
 class UserService {
@@ -69,11 +68,12 @@ class UserService {
             return this.responsedto
         }else{
             const updateUser = {
-                id: name,
+                id,
                 ...updateUserDto
             }
     
-            this.responsedto.data =  await User.update(updateUser, { where : {id: name}})
+            const updateMusic =  await User.update(updateUser, { where : {id}})
+
             this.responsedto.code = 200
             this.responsedto.message = "Usuario actualizado"
             return this.responsedto
@@ -119,19 +119,20 @@ class UserService {
         
         this.responsedto = new ResponseDto()
         
-        const user = await Music.findOne({where : {id}})
+            const music = await User.findOne({where: {id}})
 
-        if(!user){
-            this.responsedto.message = "No se encontro el usuario con el id ingresado"
-            this.responsedto.code = 404
-            return this.responsedto
-        }else{
-            this.responsedto.data =  await User.destroy({ where: { id }})
-            this.responsedto.message = "Usuario eliminado"
+            if(!music){
+                this.responsedto.code = 400
+                this.responsedto.message = "No se encontro el usuario ingresado"
+                return this.responsedto
+            }
+
+            const deleteMusic= await User.destroy({ where: { id }})
+
+            this.responsedto.message = 'Usuario eliminado'
             this.responsedto.code = 200
-            return this.responsedto
-        }
 
+            return this.responsedto;
     }
 
     public async getUserRole (id: number) {

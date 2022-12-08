@@ -41,7 +41,7 @@ class UserController {
     //TRAER UNO
     async getOne(req: Request, res: Response): Promise<Response>{
 
-    //    if (tokenG.role !== 'admin') return res.status(401).send({ code: 401, message: 'You dont have permission to get a user!' });
+       if (tokenG.role !== 'admin') return res.status(401).send({ code: 401, message: 'You dont have permission to get a user!' });
 
         const { id } = req.params;
         const responsedto = await userService.getOne(+id);

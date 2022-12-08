@@ -4,7 +4,6 @@ import { conn } from '../database/connection';
 import { PlayListSong } from './playlist_song';
 
 export interface PlayListAddModel {
-    id: number,
     name: string
 }
 
@@ -13,14 +12,7 @@ export interface PlayListModel extends Sequelize.Model<PlayListModel, PlayListAd
     name: string
 }
 
-export const PlayList = conn.define(
-    'palylists',
-    {
-        id: {
-            type: Sequelize.DataType.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-        },
+export const PlayList = conn.define<PlayListModel, PlayListAddModel>(  'palylists', {
         name: {
             type: Sequelize.DataType.STRING(50)
         }

@@ -1,4 +1,3 @@
-import { AutoIncrement, Column, DataType, Model, Table } from "sequelize-typescript";
 import * as Sequelize from 'sequelize-typescript'
 import {conn }from "../database/connection";
 import { PlayListSong } from "./playlist_song";
