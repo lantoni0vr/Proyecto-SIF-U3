@@ -17,8 +17,8 @@ class PlayListController {
     // 
     async getOnePlaylist (req: Request, res: Response): Promise<Response>{
         const { id } = req.params;
-        const playListOne = await playlistService.getOneAndMusic(+id, tokenG.id);
-        return res.json(playListOne);
+        const responsedto = await playlistService.getOneAndMusic(+id, tokenG.id);
+        return res.status(responsedto.code).json(responsedto);
     }
     
     //agregar cacion a las playlist
